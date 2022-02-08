@@ -89,6 +89,12 @@ if [ -d $OLD_DATA_DIR_2 ]; then
 fi
 
 [ -d $DATA_DIR ] || mkdir -p $DATA_DIR || abort "! Can't create $DATA_DIR"
+# enable all config by default
+
+for config in setns isolated app_zygote_magic initrc; do
+mktouch "$MODPATH/$config"
+done
+
 
 ui_print "- Setting permissions"
 set_perm_recursive $MODPATH 0 0 0755 0644
